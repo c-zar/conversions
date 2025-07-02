@@ -2,11 +2,22 @@
   import type {} from "./types";
   import type { UnitDefinition } from "./types";
 
-  // Remove context="module" and declare individual instead of a single object
   export let units: UnitDefinition[];
   export let formatNumber: (value: number | undefined) => string;
   export let parseInput: (value: string) => number | undefined;
   export let converter: any;
+
+  // Find the master unit (where toMaster(1) === 1 and fromMaster(1) === 1)
+  const masterUnit = units.find((u) => u.isMaster == true);
+  const otherUnits = units.filter((u) => u !== masterUnit);
+
+  // Sort the other units from smallest to largest
+  const sortedUnits = [
+    ...(masterUnit ? [masterUnit] : []),
+    ...otherUnits.sort((a, b) => a.toMaster(1) - b.toMaster(1)),
+  ];
+
+  units = sortedUnits;
 </script>
 
 <div

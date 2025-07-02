@@ -5,15 +5,7 @@
     parseInputValue,
     persistentState,
   } from "./utils.svelte";
-
-  interface UnitDefinition {
-    key: string;
-    label: string;
-    symbol: string;
-    color: string;
-    toMaster: (value: number) => number; // Convert from this unit to cubic meters
-    fromMaster: (value: number) => number; // Convert from cubic meters to this unit
-  }
+  import type { UnitDefinition } from "./types";
 
   const units: UnitDefinition[] = [
     {
@@ -29,6 +21,7 @@
       label: "Liter",
       symbol: "L",
       color: "emerald-600",
+      isMaster: true,
       toMaster: (v) => v * 0.001,
       fromMaster: (v) => v / 0.001,
     },

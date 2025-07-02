@@ -5,15 +5,7 @@
     parseInputValue,
     persistentState,
   } from "./utils.svelte";
-
-  interface UnitDefinition {
-    key: string;
-    label: string;
-    symbol: string;
-    color: string;
-    toMaster: (value: number) => number; // Convert from this unit to Celsius
-    fromMaster: (value: number) => number; // Convert from Celsius to this unit
-  }
+  import type { UnitDefinition } from "./types";
 
   const units: UnitDefinition[] = [
     {
@@ -21,6 +13,7 @@
       label: "Celsius",
       symbol: "°C",
       color: "primary-600",
+      isMaster: true,
       toMaster: (c) => c,
       fromMaster: (c) => c,
     },

@@ -6,15 +6,7 @@
     parseInputValue,
     persistentState,
   } from "./utils.svelte";
-
-  interface UnitDefinition {
-    key: string;
-    label: string;
-    symbol: string;
-    color: string;
-    toMaster: (value: number) => number; // Convert from this unit to meters
-    fromMaster: (value: number) => number; // Convert from meters to this unit
-  }
+  import type { UnitDefinition } from "./types";
 
   const units: UnitDefinition[] = [
     {
@@ -22,6 +14,7 @@
       label: "Meter",
       symbol: "m",
       color: "emerald-600",
+      isMaster: true,
       toMaster: (v) => v,
       fromMaster: (v) => v,
     },

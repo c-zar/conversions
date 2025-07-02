@@ -3,6 +3,7 @@ export interface UnitDefinition {
   label: string;
   symbol: string;
   color: string;
+  isMaster?: boolean; // Optional, true if this is the master unit
   toMaster: (value: number) => number;
   fromMaster: (value: number) => number;
 }
