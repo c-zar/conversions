@@ -29,13 +29,13 @@
       </p>
 
       <div
-        class="inline-flex bg-slate-100 p-1 rounded-xl border border-slate-200">
+        class="flex flex-wrap justify-center gap-2 bg-slate-100 p-2 rounded-xl border border-slate-200">
         {#each pages as { id, label }}
           <button
             class="px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-200 {currentPage ===
             id
               ? 'bg-white text-primary-600 shadow-sm'
-              : 'text-slate-600 hover:text-slate-700 hover:bg-slate-200'}"
+              : 'text-slate-600 hover:text-slate-700 hover:bg-slate-300 bg-slate-200'}"
             onclick={() => (currentPage = id)}>
             {label}
           </button>
@@ -44,7 +44,7 @@
           class="px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-200 {currentPage ===
           'all'
             ? 'bg-white text-primary-600 shadow-sm'
-            : 'text-slate-600 hover:text-slate-700 hover:bg-slate-200'}"
+            : 'text-slate-600 hover:text-slate-700 hover:bg-slate-300 bg-slate-200'}"
           onclick={() => (currentPage = "all")}>
           Show All
         </button>
