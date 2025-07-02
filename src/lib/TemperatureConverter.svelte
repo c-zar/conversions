@@ -1,6 +1,10 @@
 <script lang="ts">
   import Converter from "./Converter.svelte";
-  import { formatNumberStandard, parseInputValue } from "./utils";
+  import {
+    formatNumberStandard,
+    parseInputValue,
+    persistentState,
+  } from "./utils.svelte";
 
   interface UnitDefinition {
     key: string;
@@ -55,7 +59,10 @@
   ];
 
   class Temperature {
-    #master = $state<number | undefined>();
+    #master = persistentState<number | undefined>(
+      "temperature-master",
+      undefined,
+    );
     #units: UnitDefinition[];
 
     constructor(units: UnitDefinition[]) {
@@ -64,40 +71,46 @@
       units.forEach((unit) => {
         Object.defineProperty(this, unit.key, {
           get: () =>
-            this.#master === undefined
+            this.#master.value === undefined
               ? undefined
-              : unit.fromMaster(this.#master),
+              : unit.fromMaster(this.#master.value),
           set: (value: number | undefined) => {
             if (value === undefined || value === null || isNaN(value)) {
-              this.#master = undefined;
+              this.#master.value = undefined;
               return;
             }
-            this.#master = unit.toMaster(value);
+            this.#master.value = unit.toMaster(value);
           },
         });
       });
     }
 
     get isAbsoluteZero() {
-      return this.#master !== undefined && this.#master <= -273.15;
+      return this.#master.value !== undefined && this.#master.value <= -273.15;
     }
 
     get isFreezingPoint() {
-      return this.#master !== undefined && Math.abs(this.#master - 0) < 0.01;
+      return (
+        this.#master.value !== undefined &&
+        Math.abs(this.#master.value - 0) < 0.01
+      );
     }
 
     get isBoilingPoint() {
-      return this.#master !== undefined && Math.abs(this.#master - 100) < 0.01;
+      return (
+        this.#master.value !== undefined &&
+        Math.abs(this.#master.value - 100) < 0.01
+      );
     }
 
     get temperatureCategory() {
-      if (this.#master === undefined) return "Unknown";
-      if (this.#master < -40) return "Extremely Cold";
-      if (this.#master < 0) return "Freezing";
-      if (this.#master < 20) return "Cold";
-      if (this.#master < 30) return "Cool";
-      if (this.#master < 40) return "Warm";
-      if (this.#master < 60) return "Hot";
+      if (this.#master?.value === undefined) return "Unknown";
+      if (this.#master.value < -40) return "Extremely Cold";
+      if (this.#master.value < 0) return "Freezing";
+      if (this.#master.value < 20) return "Cold";
+      if (this.#master.value < 30) return "Cool";
+      if (this.#master.value < 40) return "Warm";
+      if (this.#master.value < 60) return "Hot";
       return "Extremely Hot";
     }
   }

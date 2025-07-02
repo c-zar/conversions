@@ -26,11 +26,13 @@
             type="number"
             step="any"
             placeholder="Enter value..."
-            value={formatNumber(converter[unit.key])}
-            oninput={(e) => {
-              const target = e.target as HTMLInputElement;
-              converter[unit.key] = parseInput(target.value);
-            }} />
+            bind:value={
+              () =>
+                converter[unit.key] === undefined
+                  ? ""
+                  : formatNumber(converter[unit.key]),
+              (v) => (converter[unit.key] = parseInput(v))
+            } />
           <span
             class="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-semibold text-{unit.color} pointer-events-none">
             {unit.symbol}

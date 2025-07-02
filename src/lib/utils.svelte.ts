@@ -14,3 +14,20 @@ export function parseInputValue(value: string): number | undefined {
   const parsed = parseFloat(value);
   return isNaN(parsed) ? undefined : parsed;
 }
+
+export function persistentState<T>(key: string, initial: T) {
+  let _value: T = initial;
+  try {
+    const stored = localStorage.getItem(key);
+    if (stored !== null) _value = JSON.parse(stored);
+  } catch {}
+  return {
+    get value() {
+      return _value;
+    },
+    set value(val: T) {
+      _value = val;
+      localStorage.setItem(key, JSON.stringify(_value));
+    },
+  };
+}

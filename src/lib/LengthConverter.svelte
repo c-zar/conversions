@@ -1,7 +1,11 @@
 <script lang="ts">
   import Converter from "./Converter.svelte";
   import type { BaseConverterProps } from "./types";
-  import { formatNumberStandard, parseInputValue } from "./utils";
+  import {
+    formatNumberStandard,
+    parseInputValue,
+    persistentState,
+  } from "./utils.svelte";
 
   interface UnitDefinition {
     key: string;
@@ -112,7 +116,7 @@
   ];
 
   class Length {
-    #master = $state<number | undefined>();
+    #master = persistentState<number | undefined>("length-master", undefined);
     #units: UnitDefinition[];
 
     constructor(units: UnitDefinition[]) {
@@ -120,15 +124,15 @@
       units.forEach((unit) => {
         Object.defineProperty(this, unit.key, {
           get: () =>
-            this.#master === undefined
+            this.#master.value === undefined
               ? undefined
-              : unit.fromMaster(this.#master),
+              : unit.fromMaster(this.#master.value),
           set: (value: number | undefined) => {
             if (value === undefined || value === null || isNaN(value)) {
-              this.#master = undefined;
+              this.#master.value = undefined;
               return;
             }
-            this.#master = unit.toMaster(value);
+            this.#master.value = unit.toMaster(value);
           },
         });
       });
