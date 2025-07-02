@@ -1,71 +1,72 @@
-@import "tailwindcss";
-
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
+@import "tailwindcss";
+
 @theme {
-    --color-primary-50: #eff6ff;
-    --color-primary-100: #dbeafe;
-    --color-primary-500: #3b82f6;
-    --color-primary-600: #2563eb;
-    --color-primary-700: #1d4ed8;
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
 
-    --color-orange-500: #f97316;
-    --color-orange-600: #ea580c;
+  --color-orange-500: #f97316;
+  --color-orange-600: #ea580c;
 
-    --color-purple-500: #8b5cf6;
-    --color-purple-600: #7c3aed;
+  --color-purple-500: #8b5cf6;
+  --color-purple-600: #7c3aed;
 
-    --color-teal-500: #14b8a6;
-    --color-teal-600: #0d9488;
+  --color-teal-500: #14b8a6;
+  --color-teal-600: #0d9488;
 
-    --color-emerald-500: #10b981;
-    --color-emerald-600: #059669;
+  --color-emerald-500: #10b981;
+  --color-emerald-600: #059669;
 
-    --color-amber-500: #f59e0b;
-    --color-violet-500: #8b5cf6;
-    --color-rose-500: #f43f5e;
-    --color-cyan-500: #06b6d4;
-    --color-red-500: #ef4444;
-    --color-red-600: #dc2626;
-    --color-indigo-500: #6366f1;
-    --color-pink-500: #ec4899;
+  --color-amber-500: #f59e0b;
+  --color-violet-500: #8b5cf6;
+  --color-rose-500: #f43f5e;
+  --color-cyan-500: #06b6d4;
+  --color-red-500: #ef4444;
+  --color-red-600: #dc2626;
+  --color-indigo-500: #6366f1;
+  --color-pink-500: #ec4899;
 }
 
 @layer base {
-    body {
-        font-family: "Inter", sans-serif;
-    }
-    input[type="number"]::-webkit-inner-spin-button,
-    input[type="number"]::-webkit-outer-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
+  body {
+    font-family: "Inter", sans-serif;
+  }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 }
 
 @layer components {
-    .gradient-text {
-        background-image: linear-gradient(
-            to right,
-            var(--color-primary-600),
-            var(--color-orange-600)
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        color: transparent;
-    }
+  .gradient-text {
+    background-image: linear-gradient(
+      to right,
+      var(--color-primary-600),
+      var(--color-orange-600)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
 
-    .input-focus:focus {
-        outline: none;
-        box-shadow: 0 0 0 3px
-            color-mix(in srgb, var(--color-primary-500) 20%, transparent);
-        border-color: var(--color-primary-500);
-    }
+  .input-focus:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px
+      color-mix(in srgb, var(--color-primary-500) 20%, transparent);
+    border-color: var(--color-primary-500);
+  }
 
-    .card-hover:hover {
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-            0 4px 6px -4px rgba(0, 0, 0, 0.1);
-        transform: translateY(-0.25rem);
-        transition: all 0.3s;
-    }
+  .card-hover:hover {
+    box-shadow:
+      0 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    transform: translateY(-0.25rem);
+    transition: all 0.3s;
+  }
 }
