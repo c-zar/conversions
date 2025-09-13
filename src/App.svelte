@@ -3,6 +3,7 @@
   import VolumeConverter from "./lib/VolumeConverter.svelte";
   import LengthConverter from "./lib/LengthConverter.svelte";
   import EnergyConverter from "./lib/EnergyConverter.svelte";
+  import LeaseCalculator from "./lib/LeaseCalculator.svelte";
 
   const pages = [
     {
@@ -13,9 +14,10 @@
     { id: "volume", label: "Volume", component: VolumeConverter },
     { id: "length", label: "Length", component: LengthConverter },
     { id: "energy", label: "Energy", component: EnergyConverter },
+    { id: "lease", label: "Lease", component: LeaseCalculator },
   ] as const;
 
-  let currentPage = $state<(typeof pages)[number]["id"] | "all">("temperature");
+  let currentPage = $state<(typeof pages)[number]["id"] | "all">("lease");
 </script>
 
 <div class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-4">
