@@ -74,7 +74,7 @@
     dealerDocFee.value +
     acquisitionFee.value;
   $: totalLeaseCost = baseTotal + totalFees;
-  $: taxAmount = totalLeaseCost * taxRate.value;
+  $: taxAmount = adjustedCapCost * taxRate.value;
   $: totalLeaseCostWithTax = totalLeaseCost + taxAmount;
   $: basePayment = leaseTerm.value > 0 ? baseTotal / leaseTerm.value : 0;
   $: monthlyWithTax =
@@ -393,6 +393,11 @@
         <span class="text-blue-700 text-right min-w-[8rem]">
           {formatCurrency(taxAmount)}
         </span>
+      </div>
+      <div class="text-slate-700 text-base font-semibold flex justify-between">
+        <span>Total Lease Cost </span>
+        <span class="text-blue-700 text-right min-w-[8rem]"
+          >{formatCurrency(totalLeaseCost)}</span>
       </div>
       <div class="text-slate-700 text-base font-semibold flex justify-between">
         <span>Total Lease Cost (with tax)</span>
